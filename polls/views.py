@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-# from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 # from django.template import loader
-from .models import Question
+from .models import Choice, Question
 from django.http import Http404
 from django.urls import reverse
 
@@ -56,6 +55,10 @@ def index(request):
     # return HttpResponse(template.render(context, request))
     # output = ', '.join([q.question_text for q in latest_question_list])
     # return HttpResponse(output)
+
+def results(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question': question})
 
 # def index(request):
 #     return HttpResponse("Hello world! You're at the polls index.")
